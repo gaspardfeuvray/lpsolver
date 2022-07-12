@@ -1,0 +1,19 @@
+{
+  "name": "lpsolver",
+  "version": "1.0.1",
+  "description": "Solve Mixed Integer Linear Programming problems",
+  "type": "module",
+  "main": "./lib/src/index.js",
+  "types": "./lib/src/index.d.ts",
+  "scripts": {
+    "build": "tsc && rm -r lib/test && uglifyjs --compress --output lib/src/LpProblem.js -- lib/src/LpProblem.js",
+    "test": "tsc && node lib/test/tests.js"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^4.7.4",
+    "uglify-js": "^3.16.2"
+  },
+  "dependencies": {}
+}
