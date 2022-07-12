@@ -44,3 +44,13 @@ const { solutionStatus, variables, objectiveValue } = solveLp(A, b, c)
 
 console.log("Problem is", solutionStatus)
 ```
+
+## Contribute
+There does not seem to be many solvers for the browser. That's a shame.
+
+Next steps could be:
+
+- Support Mixed Integer Linear Programs
+- Improve solver for speed & numerical stability
+
+Don't hesitate to fork 🍴
