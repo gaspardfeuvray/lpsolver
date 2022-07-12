@@ -25,7 +25,11 @@ const cases: TestCase[] = [
       b: [1, 2],
       c: [5, -3],
     },
-    solution: { is: "SOLVED", variables: [1, 0], objectiveValue: 5 },
+    solution: {
+      solutionStatus: "SOLVED",
+      variables: [1, 0],
+      objectiveValue: 5,
+    },
   },
   {
     name: "Basic solution feasible 2",
@@ -38,7 +42,11 @@ const cases: TestCase[] = [
       b: [30, 24, 36],
       c: [3, 1, 2],
     },
-    solution: { is: "SOLVED", variables: [8, 4, 0], objectiveValue: 28 },
+    solution: {
+      solutionStatus: "SOLVED",
+      variables: [8, 4, 0],
+      objectiveValue: 28,
+    },
   },
   {
     name: "Basic solution feasible 3",
@@ -51,7 +59,11 @@ const cases: TestCase[] = [
       b: [-2, -1, -1],
       c: [-4, -2, -4, -1],
     },
-    solution: { is: "SOLVED", variables: [1, 1, 0, 1], objectiveValue: -7 },
+    solution: {
+      solutionStatus: "SOLVED",
+      variables: [1, 1, 0, 1],
+      objectiveValue: -7,
+    },
   },
   {
     name: "Basic solution infeasible",
@@ -60,7 +72,11 @@ const cases: TestCase[] = [
       b: [1, -1],
       c: [1],
     },
-    solution: { is: "INFEASIBLE", variables: [], objectiveValue: Number.NaN },
+    solution: {
+      solutionStatus: "INFEASIBLE",
+      variables: [],
+      objectiveValue: Number.NaN,
+    },
   },
   {
     name: "LP infeasible",
@@ -72,7 +88,11 @@ const cases: TestCase[] = [
       b: [2, -10],
       c: [3, -2],
     },
-    solution: { is: "INFEASIBLE", variables: [], objectiveValue: Number.NaN },
+    solution: {
+      solutionStatus: "INFEASIBLE",
+      variables: [],
+      objectiveValue: Number.NaN,
+    },
   },
   {
     name: "LP unbounded",
@@ -84,7 +104,11 @@ const cases: TestCase[] = [
       b: [-1, -2],
       c: [1, -1],
     },
-    solution: { is: "UNBOUNDED", variables: [], objectiveValue: Number.NaN },
+    solution: {
+      solutionStatus: "UNBOUNDED",
+      variables: [],
+      objectiveValue: Number.NaN,
+    },
   },
 ];
 
@@ -100,11 +124,11 @@ const executeTest = (tCase: TestCase) => {
     "\u001b[" + (s ? "32" : "31") + "m" + (s ? "passed" : "fail") + "\u001b[0m";
   // console.log("tCase.problem.c", tCase.problem.c);
   console.log(
-    passedOrFail(solution.is === tCase.solution.is),
+    passedOrFail(solution.solutionStatus === tCase.solution.solutionStatus),
     "*** Test:",
     tCase.name,
     `| num variables: ${tCase.problem.c.length}`,
-    solution.is === "SOLVED"
+    solution.solutionStatus === "SOLVED"
       ? `| values: ${solution.variables} | obj value: ${solution.objectiveValue}`
       : ""
   );

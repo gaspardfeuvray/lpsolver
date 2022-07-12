@@ -7,9 +7,9 @@ const swap = (a: number, b: number): [number, number] => [b, a];
 // export type problemIs = "SOLVED" | "UNBOUNDED" | "INFEASIBLE";
 
 export interface Solution {
-  is: "SOLVED" | "INFEASIBLE" | "UNBOUNDED";
-  variables: number[];
-  objectiveValue: number;
+  solutionStatus: "SOLVED" | "INFEASIBLE" | "UNBOUNDED";
+  variables: number[]; // empty if not solved
+  objectiveValue: number; // NaN if not solved
 }
 
 export class LpProblem {
@@ -233,13 +233,21 @@ export class LpProblem {
   // Returns a vector of -1s if unbounded, -2s if infeasible.
   solve_simplex = (): Solution => {
     if (this.#initialise_simplex() == -1)
-      return { is: "INFEASIBLE", variables: [], objectiveValue: Number.NaN };
+      return {
+        solutionStatus: "INFEASIBLE",
+        variables: [],
+        objectiveValue: Number.NaN,
+      };
 
     let code;
     while (!(code = this.#iterate_simplex()));
 
     if (code == -1)
-      return { is: "UNBOUNDED", variables: [], objectiveValue: Number.NaN };
+      return {
+        solutionStatus: "UNBOUNDED",
+        variables: [],
+        objectiveValue: Number.NaN,
+      };
 
     // console.log("this.#N:::", this.#N);
     // console.log("this.#B:::", this.#B);
@@ -253,7 +261,7 @@ export class LpProblem {
     for (let i = 0; i < this.#m; i++) x[this.#B[i]] = this.#b[i];
 
     return {
-      is: "SOLVED",
+      solutionStatus: "SOLVED",
       variables: x.slice(0, this.#n),
       objectiveValue: this.#v,
     };
