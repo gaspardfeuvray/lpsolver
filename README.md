@@ -22,6 +22,13 @@ npm install lpsolver
 ```
 
 ## Getting started
+
+Express your problem in the canonical form using parameters A, b and c. 
+
+b.length == number of constraints
+
+c.length == number of variables
+
 ```js
 import { solveLp } from "lpsolver"
 
